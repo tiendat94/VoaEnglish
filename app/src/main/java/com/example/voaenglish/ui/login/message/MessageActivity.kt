@@ -43,6 +43,15 @@ class MessageActivity : BaseActivity() {
         setupAdapter()
         listenerSwipe()
 
+        checkAllMessage.setOnClickListener {
+            if (checkAllMessage.isChecked) {
+                adapter?.selectAll()
+
+            } else {
+                adapter?.unSelectAll()
+            }
+        }
+
         activityMessageBinding.executePendingBindings()
     }
 

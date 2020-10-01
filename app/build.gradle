@@ -3,14 +3,21 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.example.voaenglish"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -136,5 +143,30 @@ dependencies {
         exclude group: 'com.android.support', module: 'cardview-v7'
         exclude group: 'com.android.support', module: 'customtabs'
     }
+    implementation 'com.facebook.android:facebook-share:4.35.0'
 
+
+    def anko_version = '0.10.8'
+    implementation "org.jetbrains.anko:anko-sdk21:$anko_version"
+    implementation "org.jetbrains.anko:anko-sdk21-listeners:$anko_version"
+    implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+    implementation "org.jetbrains.anko:anko-design:$anko_version"
+
+    implementation 'xyz.sangcomz:indicatordecorator:0.1.1'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation 'com.karumi:dexter:4.2.0'
+
+    //image silde
+    implementation 'com.github.smarteist:autoimageslider:1.3.9-appcompat'
+
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
+    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:19.1.1'
+    implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+
+    implementation 'com.facebook.android:account-kit-sdk:5.0.0'
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
 }

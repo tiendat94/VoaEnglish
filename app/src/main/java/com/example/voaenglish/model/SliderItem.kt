@@ -1,4 +1,3 @@
 package com.example.voaenglish.model
 
-class SliderItem {
-}
+data class SliderItem(var description: String? = null, var imageUrl: String? = null)

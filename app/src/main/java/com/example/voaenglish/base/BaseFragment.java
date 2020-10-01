@@ -84,7 +84,6 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     }
 
 
-
     public interface Callback {
         void onFragmentAttached();
 

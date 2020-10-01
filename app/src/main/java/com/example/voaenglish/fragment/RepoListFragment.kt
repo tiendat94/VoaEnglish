@@ -1,6 +1,9 @@
 package com.example.voaenglish.fragment
 
+import android.Manifest
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +17,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.voaenglish.adapter.RepoListAdapter
 import com.example.voaenglish.databinding.FragmentRepoListBinding
 import com.example.voaenglish.viewmodel.RepoListViewModel
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.fragment_repo_list.*
 
 class RepoListFragment : Fragment() {
@@ -35,9 +44,39 @@ class RepoListFragment : Fragment() {
 
         viewDataBinding.viewmodel?.fetchRepoList()
         viewDataBinding.viewmodel?.fetListInbox()
+        openCameraButton?.setOnClickListener {
+            checkPermission()
+        }
 
         setupAdapter()
         setupObservers()
+    }
+
+    private fun checkPermission() {
+        Dexter.withActivity(activity)
+                .withPermission(Manifest.permission.CAMERA)
+                .withListener(object : PermissionListener {
+                    override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                        // permission is granted, open camera
+                        openCamera()
+                    }
+
+                    override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+                        if (response?.isPermanentlyDenied!!) {
+
+                        }
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
+                        token?.continuePermissionRequest()
+                    }
+
+                }).check()
+    }
+
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, 100)
     }
 
     private fun setupObservers() {

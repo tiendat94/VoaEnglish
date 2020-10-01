@@ -6,5 +6,7 @@ class Constants {
         const val REQUEST_TIMEOUT_DURATION = 10
         const val DEBUG = true
         const val DB_NAME = "voaenglish"
+        const val FILE_SCHEME = "file://"
+        const val UTF8 = "UTF-8"
     }
 }

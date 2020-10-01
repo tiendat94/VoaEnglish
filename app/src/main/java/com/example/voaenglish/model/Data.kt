@@ -1,4 +1,3 @@
 package com.example.voaenglish.model
 
-class Data {
-}
+data class Data(var name: String?, var isSelected: Boolean?)

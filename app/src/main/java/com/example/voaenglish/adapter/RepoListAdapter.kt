@@ -26,7 +26,7 @@ class RepoListAdapter(private val repoListViewModel: RepoListViewModel) : Recycl
             Glide.with(itemView.context).load(itemData.owner.avatar_url).into(avartarImage)
 
             itemView.setOnClickListener {
-                RepoDetailActivity.gotoActivityRepoDetail(itemView.context, itemData)
+                RepoDetailActivity.gotoActivityRepoDetail(itemView.context, itemData?.description, itemData?.html_url, itemData?.full_name)
             }
         }
     }

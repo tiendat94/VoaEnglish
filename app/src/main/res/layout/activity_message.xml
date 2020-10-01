@@ -14,10 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <CheckBox
+            android:id="@+id/checkAllMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="10dp" />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkAllMessage">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/message_list_rv"

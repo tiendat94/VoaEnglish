@@ -13,6 +13,7 @@ class VoaAppKolin : Application() {
         FacebookSdk.isInitialized()
         Realm.init(applicationContext)
         Realm.setDefaultConfiguration(RealmHelper.Companion.instance.getRealmConfig(applicationContext))
+
     }
 
     companion object {
