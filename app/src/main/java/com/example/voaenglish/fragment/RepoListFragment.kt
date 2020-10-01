@@ -27,6 +27,16 @@ import kotlinx.android.synthetic.main.fragment_repo_list.*
 
 class RepoListFragment : Fragment() {
 
+    companion object {
+        fun newInstance(position: Int?): RepoListFragment {
+            val instance = RepoListFragment()
+            val args = Bundle()
+            args.putInt("position", position!!)
+            instance.arguments = args
+            return instance
+        }
+    }
+
     private lateinit var viewDataBinding: FragmentRepoListBinding
     private lateinit var adapter: RepoListAdapter
 

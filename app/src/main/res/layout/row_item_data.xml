@@ -36,6 +36,15 @@
                 android:textColor="@color/black"
                 android:textSize="16dp" />
 
+            <TextView
+                android:id="@+id/textCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="10"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
 
             <ImageButton
                 android:id="@+id/btn_delete_unit"
@@ -47,7 +56,6 @@
 
 
         </LinearLayout>
-
 
     </RelativeLayout>
 

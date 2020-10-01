@@ -27,21 +27,10 @@ class MainActivityKotlin : BaseActivity() {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, repoListFragment)
                     .commitAllowingStateLoss()
+
         }
 
     }
-
-//    public void hidKeyboard() {
-//        View view = this.getCurrentFocus();
-//
-//        if (view != null) {
-//            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//            if (inputMethodManager != null) {
-//                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//            }
-//        }
-//
-//    }
 
     fun hideKeyboard() {
         val view: View? = this.currentFocus

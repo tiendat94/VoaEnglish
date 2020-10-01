@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_home"
+        android:icon="@drawable/alarm"
+        android:title="Home" />
+    <item
+        android:id="@+id/tab_friend"
+        android:icon="@drawable/bed"
+        android:title="Setting" />
+    <item
+        android:id="@+id/tab_love"
+        android:icon="@drawable/stopwatch"
+        android:title="Favorite" />
+
+    <item
+        android:id="@+id/tab_account"
+        android:icon="@drawable/timer"
+        android:title="Account" />
+
+</menu>
