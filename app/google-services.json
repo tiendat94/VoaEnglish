@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "466582491589",
+    "firebase_url": "https://voaenglish-23d65.firebaseio.com",
+    "project_id": "voaenglish-23d65",
+    "storage_bucket": "voaenglish-23d65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466582491589:android:0802526d4ad2509255fbac",
+        "android_client_info": {
+          "package_name": "com.example.voaenglish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466582491589-e2rq8fkj06i1l1ictmfjoeq504g2g2mr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.voaenglish",
+            "certificate_hash": "c6561e5dbf086ffeadf576d64607b6f4b8f876c4"
+          }
+        },
+        {
+          "client_id": "466582491589-a3ee51c0868pe226dj62f61r6ubqh31k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi3BRWcUC6YvOygIp8ExQvl92nuo0fAmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466582491589-a3ee51c0868pe226dj62f61r6ubqh31k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
