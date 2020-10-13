@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.voaenglish.adapter.DeleteAdapter
-import com.example.voaenglish.database.DatabaseManager
 import com.example.voaenglish.date.DatePickerHelper
 import com.example.voaenglish.model.Data
 import com.example.voaenglish.model.Dog
@@ -23,7 +22,6 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_scrolling.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -58,7 +56,6 @@ class CollapsingActivity : AppCompatActivity() {
         initData()
         datePickerDialog = DatePickerHelper(this@CollapsingActivity, false)
         fusedLocationClinet = LocationServices.getFusedLocationProviderClient(this@CollapsingActivity)
-        val realm = Realm.getDefaultInstance()
 
         chk_select_all?.setOnClickListener {
             if (chk_select_all.isChecked) {
@@ -85,6 +82,10 @@ class CollapsingActivity : AppCompatActivity() {
                     }
                     checkPermissionLocation()
                     showDatePickerDialog()
+                    val intent = Intent()
+                    intent.putExtra("HELLO", "GET RESULT FROM ACTIVITY")
+                    setResult(RESULT_OK, intent)
+                    finish()
                 }
             }
 
@@ -92,12 +93,6 @@ class CollapsingActivity : AppCompatActivity() {
                 openMap()
             }
             val dog = Dog("BLack", 2)
-            DatabaseManager.instance.saveDog(this@CollapsingActivity, dog)
-
-            var testDB = DatabaseManager.instance.getDog(this@CollapsingActivity, 2)
-            testDB?.let {
-                Log.d("dog = ", it?.name)
-            }
 
         }
 

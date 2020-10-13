@@ -1,23 +1,37 @@
 package com.example.voaenglish
 
 import android.app.Application
-import com.example.voaenglish.database.RealmHelper
+import android.widget.Toast
+import com.example.voaenglish.callback.AppLifecyclerHandler
+import com.example.voaenglish.callback.LifecycleDelete
 import com.facebook.FacebookSdk
-import io.realm.Realm
+import com.google.android.gms.ads.MobileAds
 
-class VoaAppKolin : Application() {
+class VoaAppKolin : Application(), LifecycleDelete {
+    private lateinit var appLifecyclerHandler: AppLifecyclerHandler
 
     override fun onCreate() {
         super.onCreate()
         instance = this
         FacebookSdk.isInitialized()
-        Realm.init(applicationContext)
-        Realm.setDefaultConfiguration(RealmHelper.Companion.instance.getRealmConfig(applicationContext))
-
+        MobileAds.initialize(this)
+//        Realm.init(applicationContext)
+//        Realm.setDefaultConfiguration(RealmHelper.Companion.instance.getRealmConfig(applicationContext))
+        appLifecyclerHandler = AppLifecyclerHandler(this)
+        registerActivityLifecycleCallbacks(appLifecyclerHandler)
+        registerComponentCallbacks(appLifecyclerHandler)
     }
 
     companion object {
         lateinit var instance: VoaAppKolin
+    }
+
+    override fun onAppBackground() {
+        Toast.makeText(applicationContext, "onAppBackground", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onAppForeground() {
+        Toast.makeText(applicationContext, "onAppForeground", Toast.LENGTH_LONG).show()
     }
 
 }

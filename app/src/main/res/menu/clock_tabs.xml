@@ -3,20 +3,25 @@
 
     <item
         android:id="@+id/tab_home"
-        android:icon="@drawable/alarm"
+        android:checked="true"
+        android:icon="@drawable/ic_grid"
+        android:iconTint="@color/background_app_light"
         android:title="Home" />
     <item
         android:id="@+id/tab_friend"
-        android:icon="@drawable/bed"
-        android:title="Setting" />
+        android:icon="@drawable/ic_clock"
+        android:iconTint="@color/logger"
+        android:title="Logger" />
     <item
         android:id="@+id/tab_love"
-        android:icon="@drawable/stopwatch"
-        android:title="Favorite" />
+        android:icon="@drawable/ic_folder"
+        android:iconTint="@color/documents"
+        android:title="Document" />
 
     <item
         android:id="@+id/tab_account"
-        android:icon="@drawable/timer"
-        android:title="Account" />
+        android:icon="@drawable/ic_android_black_24dp_rotated"
+        android:iconTint="@color/settings"
+        android:title="Settings" />
 
 </menu>

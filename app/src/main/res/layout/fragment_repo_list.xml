@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <Button
             android:id="@+id/openCameraButton"
             android:layout_width="match_parent"
@@ -22,7 +23,8 @@
             android:layout_margin="20dp"
             android:layout_marginBottom="20dp"
             android:padding="20dp"
-            android:text="Open Camera" />
+            android:text="Open Camera"
+            android:visibility="gone" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -30,7 +32,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/openCameraButton"
-            android:visibility="@{safeUnbox(viewmodel.dataLoading) ? View.GONE : View.VISIBLE}" />
+            android:visibility="@{safeUnbox(viewmodel.dataLoading) ? View.GONE : View.GONE}" />
+
+        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"

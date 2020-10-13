@@ -34,4 +34,8 @@
     <color name="orange">#FFA500</color>
     <color name="yellow">#fff44f</color>
     <color name="row_activated">#F06423</color>
+
+    //tab
+    <color name="backgroud_app">#e64a19</color>
+    <color name="background_app_light">#ff7043</color>
 </resources>

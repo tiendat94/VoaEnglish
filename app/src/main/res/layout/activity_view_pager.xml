@@ -26,13 +26,21 @@
             tools:ignore="MissingConstraints" />
         <!--            app:navigationIcon="?attr/homeAsUpIndicator"-->
 
+        <Switch
+            android:id="@+id/wifiSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toTopOf="@id/bottom_bar"
+            tools:ignore="MissingConstraints" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fitsSystemWindows="true"
             android:scrollbars="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/bottom_bar"
+            app:layout_constraintBottom_toTopOf="@id/wifiSwitch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"

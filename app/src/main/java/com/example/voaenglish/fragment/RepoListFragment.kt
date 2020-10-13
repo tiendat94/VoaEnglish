@@ -1,6 +1,7 @@
 package com.example.voaenglish.fragment
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -17,6 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.voaenglish.adapter.RepoListAdapter
 import com.example.voaenglish.databinding.FragmentRepoListBinding
 import com.example.voaenglish.viewmodel.RepoListViewModel
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.MarkerOptions
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -25,7 +30,9 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.fragment_repo_list.*
 
-class RepoListFragment : Fragment() {
+class RepoListFragment : Fragment(), OnMapReadyCallback {
+
+    private val TAG: String? = RepoListFragment::class.java.simpleName
 
     companion object {
         fun newInstance(position: Int?): RepoListFragment {
@@ -39,6 +46,19 @@ class RepoListFragment : Fragment() {
 
     private lateinit var viewDataBinding: FragmentRepoListBinding
     private lateinit var adapter: RepoListAdapter
+
+    //map
+    private lateinit var mMap: GoogleMap
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d(TAG, "onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewDataBinding = FragmentRepoListBinding.inflate(inflater, container, false).apply {
@@ -60,6 +80,48 @@ class RepoListFragment : Fragment() {
 
         setupAdapter()
         setupObservers()
+
+        Log.d(TAG, "onViewCreated")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.d(TAG, "onActivityCreated")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(TAG, "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d(TAG, "onDetach")
     }
 
     private fun checkPermission() {
@@ -114,6 +176,14 @@ class RepoListFragment : Fragment() {
             repo_list_rv.addItemDecoration(DividerItemDecoration(activity, layoutManager.orientation))
             repo_list_rv.adapter = adapter
         }
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        mMap = p0
+
+        val sydney = com.google.android.gms.maps.model.LatLng(-34.0, 151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("Austalia"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
 }

@@ -2,10 +2,7 @@ package com.example.voaenglish.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.example.voaenglish.base.BaseViewModelKotlin
-import com.example.voaenglish.model.Item
-import com.example.voaenglish.model.Message
-import com.example.voaenglish.model.Project
-import com.example.voaenglish.model.RepoRepository
+import com.example.voaenglish.model.*
 
 class RepoListViewModel : BaseViewModelKotlin() {
 
@@ -13,7 +10,7 @@ class RepoListViewModel : BaseViewModelKotlin() {
 
     val repoListInboxLive = MutableLiveData<List<Message>>()
 
-    val repoListProjectLive = MutableLiveData<List<Project>>()
+    val repoListNewsLive = MutableLiveData<List<News>>()
 
     fun fetchRepoList() {
         dataLoading.value = true
@@ -22,6 +19,19 @@ class RepoListViewModel : BaseViewModelKotlin() {
 
             if (isSuccess) {
                 repoLiveLive.value = response?.items
+                empty.value = false
+            } else {
+                empty.value = true
+            }
+        }
+    }
+
+    fun fetchNewsList() {
+        dataLoading.value = true
+        RepoRepository.getInstance().getNewList { isSucces, response ->
+            dataLoading.value = false
+            if (isSucces) {
+                repoListNewsLive.value = response?.Data
                 empty.value = false
             } else {
                 empty.value = true

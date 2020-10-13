@@ -1,15 +1,17 @@
 package com.example.voaenglish
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.voaenglish.base.BaseActivity
+import com.example.voaenglish.fragment.HomeFragment
 import com.example.voaenglish.fragment.RepoListFragment
 
 class MainActivityKotlin : BaseActivity() {
 
-    private lateinit var repoListFragment: RepoListFragment
+    private lateinit var repoListFragment: HomeFragment
 
 
     override fun getBindingVariable(): Int {
@@ -23,12 +25,14 @@ class MainActivityKotlin : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            repoListFragment = RepoListFragment()
+            repoListFragment = HomeFragment()
             supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, repoListFragment)
                     .commitAllowingStateLoss()
 
         }
+
+
 
     }
 

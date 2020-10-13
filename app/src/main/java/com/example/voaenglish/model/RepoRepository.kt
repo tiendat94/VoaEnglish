@@ -18,6 +18,7 @@ class RepoRepository {
                 if (response != null && response.isSuccessful) {
                     onResult(true, response.body()!!)
                     call?.let { Log.d("getRepoList", call.request().toString()) }
+                    response?.let { Log.d("getRepoList", response?.body().toString()) }
                 } else {
                     onResult(false, null)
                 }
@@ -26,6 +27,25 @@ class RepoRepository {
             override fun onFailure(call: Call<GitResponse>, t: Throwable) {
                 onResult(false, null)
             }
+        })
+    }
+
+    //GET news list
+    fun getNewList(onResult: (isSucces: Boolean, response: NewsResponse?) -> Unit) {
+        ApiClient.instance.getNews().enqueue(object : Callback<NewsResponse> {
+            override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
+                if (response != null && response.isSuccessful) {
+                    onResult(true, response.body()!!)
+                    response?.let { Log.d("getNewList", it?.body().toString()) }
+                } else {
+                    onResult(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
+                onResult(false, null)
+            }
+
         })
     }
 

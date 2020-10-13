@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:checked="true"
+        android:icon="@drawable/ic_grid"
+        android:iconTint="@color/background_app_light"
+        android:title="Home" />
+    <item
+        android:id="@+id/log"
+        android:icon="@drawable/ic_clock"
+        android:iconTint="@color/logger"
+        android:title="Logger" />
+
+    <item
+        android:id="@+id/doc"
+        android:icon="@drawable/ic_folder"
+        android:iconTint="@color/documents"
+        android:title="Document" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_android_black_24dp_rotated"
+        android:iconTint="@color/settings"
+        android:title="Settings" />
+</menu>

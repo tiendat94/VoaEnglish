@@ -68,8 +68,15 @@ class LoginActivityKotlin : BaseActivity() {
         repoListViewModel?.fetchRepoList()
         repoListViewModel?.repoLiveLive?.observe(this@LoginActivityKotlin, Observer {
             it?.let {
-                Log.d("LoginActivityKotlin", it.get(0).full_name)
+                //Log.d("LoginActivityKotlin", it.toString())
                 Toast.makeText(this@LoginActivityKotlin, it.get(1).description, Toast.LENGTH_LONG).show()
+            }
+        })
+
+        repoListViewModel?.fetchNewsList()
+        repoListViewModel?.repoListNewsLive?.observe(this@LoginActivityKotlin, Observer {
+            it?.let {
+                Log.d("LoginActivityKotlin", it.toString())
             }
         })
 
