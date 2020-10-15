@@ -18,10 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.voaenglish.adapter.RepoListAdapter
 import com.example.voaenglish.databinding.FragmentRepoListBinding
 import com.example.voaenglish.viewmodel.RepoListViewModel
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.MarkerOptions
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -30,7 +26,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.fragment_repo_list.*
 
-class RepoListFragment : Fragment(), OnMapReadyCallback {
+class RepoListFragment : Fragment(){
 
     private val TAG: String? = RepoListFragment::class.java.simpleName
 
@@ -48,7 +44,7 @@ class RepoListFragment : Fragment(), OnMapReadyCallback {
     private lateinit var adapter: RepoListAdapter
 
     //map
-    private lateinit var mMap: GoogleMap
+   // private lateinit var mMap: GoogleMap
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -177,13 +173,13 @@ class RepoListFragment : Fragment(), OnMapReadyCallback {
             repo_list_rv.adapter = adapter
         }
     }
-
-    override fun onMapReady(p0: GoogleMap) {
-        mMap = p0
-
-        val sydney = com.google.android.gms.maps.model.LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Austalia"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-    }
+//
+//    override fun onMapReady(p0: GoogleMap) {
+//        mMap = p0
+//
+//        val sydney = com.google.android.gms.maps.model.LatLng(-34.0, 151.0)
+//        mMap.addMarker(MarkerOptions().position(sydney).title("Austalia"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+//    }
 
 }

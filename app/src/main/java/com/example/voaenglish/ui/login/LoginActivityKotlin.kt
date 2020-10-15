@@ -16,11 +16,17 @@ import com.example.voaenglish.base.BaseActivity
 import com.example.voaenglish.model.Message
 import com.example.voaenglish.network.GitHubClient
 import com.example.voaenglish.viewmodel.RepoListViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivityKotlin : BaseActivity() {
+
+    private lateinit var mRewardedAd: RewardedAd
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -80,6 +86,21 @@ class LoginActivityKotlin : BaseActivity() {
             }
         })
 
+        loadRewardedAd()
+
+    }
+
+    private fun loadRewardedAd() {
+        if (!(::mRewardedAd.isInitialized) || !mRewardedAd.isLoaded) {
+            mRewardedAd = RewardedAd(this, R.string.rewarded_video.toString())
+            mRewardedAd.loadAd(
+                    AdRequest.Builder().build(), object : RewardedAdCallback() {
+                override fun onUserEarnedReward(p0: RewardItem) {
+
+                }
+            }
+            )
+        }
     }
 
     fun test() {
@@ -130,6 +151,10 @@ class LoginActivityKotlin : BaseActivity() {
         val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
         return networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
+
+}
+
+private fun RewardedAd.loadAd(build: AdRequest?, rewardedAdCallback: RewardedAdCallback) {
 
 }
 
