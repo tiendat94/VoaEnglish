@@ -7,12 +7,12 @@ import com.example.voaenglish.model.Message
 class FilterMessageSearch(adapter: MessageAdapter, messageList: ArrayList<Message>) : Filter() {
 
     val adapter: MessageAdapter? = adapter
-    val messageList: ArrayList<Message>? = messageList
-    val filteredList: ArrayList<Message>? = null
+    val messageList: List<Message>? = messageList
+    val filteredList: List<Message>? = null
 
 
     override fun performFiltering(constraint: CharSequence?): FilterResults {
-        filteredList?.clear()
+        (filteredList as ArrayList)?.clear()
         val results = FilterResults()
         if (constraint?.length == 0) {
             messageList?.let { filteredList?.addAll(it) }
