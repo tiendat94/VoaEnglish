@@ -1,10 +1,16 @@
 package com.example.voaenglish.model
 
 import android.util.Log
+import android.view.View
+import com.example.voaenglish.base.CallbackResApiLogout
 import com.example.voaenglish.model.api.ApiClient
 import com.example.voaenglish.model.api.RssApiClient
 import com.example.voaenglish.network.GitHubClient
+import com.google.gson.JsonElement
 import me.toptas.rssconverter.RssFeed
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +36,26 @@ class RepoRepository {
         })
     }
 
+    //get Filter Schedule
+    fun getFilterSchedule(onResult: (isSuccess: Boolean, response: FilterResponse?) -> Unit) {
+        GitHubClient.getGitHubService().filterSchedule.enqueue(object : Callback<FilterResponse> {
+            override fun onResponse(call: Call<FilterResponse>, response: Response<FilterResponse>) {
+                if (response != null && response.isSuccessful) {
+                    onResult(true, response.body())
+                    call?.let { Log.d("getFilterSchedule", call.request().toString()) }
+                    response?.let { Log.d("getFilterSchedule", response?.body().toString()) }
+                } else {
+                    onResult(false, null)
+                }
+            }
+
+            override fun onFailure(call: Call<FilterResponse>, t: Throwable) {
+                onResult(false, null)
+            }
+
+        })
+    }
+
     //GET news list
     fun getNewList(onResult: (isSucces: Boolean, response: NewsResponse?) -> Unit) {
         ApiClient.instance.getNews().enqueue(object : Callback<NewsResponse> {
@@ -45,6 +71,7 @@ class RepoRepository {
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
                 onResult(false, null)
             }
+
 
         })
     }
@@ -65,7 +92,11 @@ class RepoRepository {
             }
 
         })
+
+
     }
+
+
 
     fun getRssFeed(onResult: (isSucces: Boolean, response: RssFeed?) -> Unit) {
         RssApiClient.instance.getRss("https://learningenglish.voanews.com/api/zkm-qem\$-o").enqueue(object : Callback<RssFeed> {

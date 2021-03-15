@@ -32,6 +32,7 @@ class CollapsingActivity : AppCompatActivity() {
 
     private lateinit var deleteAdapter: DeleteAdapter
     private val item_list: ArrayList<Data> = ArrayList()
+    private val currentSelectedItems: ArrayList<Data> = ArrayList()
     private var count: Int? = 0
 
     private lateinit var datePickerDialog: DatePickerHelper
@@ -44,6 +45,18 @@ class CollapsingActivity : AppCompatActivity() {
     private val countInterface = object : DeleteAdapter.CountCheckBox {
         override fun getCountCheckBox(count: Int) {
             count?.let { textviewCount.text = count.toString() }
+        }
+
+        override fun getDataListCheckBox(dataList: ArrayList<Data>) {
+            Log.d("CollapsingActivity", dataList.size.toString())
+        }
+
+        override fun onItemCheck(data: Data) {
+            currentSelectedItems?.add(data)
+        }
+
+        override fun onItemUncheck(data: Data) {
+            currentSelectedItems?.remove(data)
         }
 
     }

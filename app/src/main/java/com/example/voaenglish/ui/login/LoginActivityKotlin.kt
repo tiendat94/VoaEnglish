@@ -13,13 +13,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.voaenglish.R
 import com.example.voaenglish.base.BaseActivity
+import com.example.voaenglish.base.CallbackResApiLogout
 import com.example.voaenglish.model.Message
+import com.example.voaenglish.model.RepoRepository
 import com.example.voaenglish.network.GitHubClient
 import com.example.voaenglish.viewmodel.RepoListViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdCallback
+import com.google.gson.JsonElement
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,9 +54,32 @@ class LoginActivityKotlin : BaseActivity() {
         return R.layout.activity_login
     }
 
+    fun getInboxNew(onResult: (isSuccess: Boolean, response: JsonElement?) -> Unit) {
+        GitHubClient.getGitHubService().inboxNew.enqueue(object : CallbackResApiLogout(this) {
+            override fun onFailure(code: Int) {
+
+            }
+
+            override fun onReceivedResponse(jsonElement: JsonElement) {
+                if (jsonElement != null) {
+                    onResult(true, jsonElement)
+                    Toast.makeText(applicationContext, "ping success", Toast.LENGTH_LONG).show()
+                }
+            }
+
+        })
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         test();
+
+        getInboxNew { isSuccess, response ->
+            if (isSuccess) {
+
+            }
+        }
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
         getUserTask().execute()
@@ -68,6 +94,8 @@ class LoginActivityKotlin : BaseActivity() {
             }
         })
 
+
+
         result?.let { Log.d("LoginActivityKotlin", result) }
 
         repoListViewModel = ViewModelProviders.of(this@LoginActivityKotlin).get(RepoListViewModel::class.java)
@@ -78,6 +106,12 @@ class LoginActivityKotlin : BaseActivity() {
                 Toast.makeText(this@LoginActivityKotlin, it.get(1).description, Toast.LENGTH_LONG).show()
             }
         })
+
+        RepoRepository.getInstance().getFilterSchedule { isSuccess, response ->
+            if (isSuccess) {
+
+            }
+        }
 
         repoListViewModel?.fetchNewsList()
         repoListViewModel?.repoListNewsLive?.observe(this@LoginActivityKotlin, Observer {

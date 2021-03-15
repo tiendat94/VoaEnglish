@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.voaenglish.FlagsActivity
 import com.example.voaenglish.R
 import com.example.voaenglish.adapter.SliderImageAdapter
 import com.example.voaenglish.base.BaseActivity
@@ -97,8 +98,11 @@ class SliderImageActivity : BaseActivity() {
 
 
                 buttonShare?.setOnClickListener {
-                    val shareDialog = ShareDialog(this@SliderImageActivity)
-                    shareDialog?.show(content, ShareDialog.Mode.AUTOMATIC)
+//                    val shareDialog = ShareDialog(this@SliderImageActivity)
+//                    shareDialog?.show(content, ShareDialog.Mode.AUTOMATIC)
+                    val newDocumentIntent = newDocumentIntent()
+                    newDocumentIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                    startActivity(newDocumentIntent)
                 }
 
             }
@@ -118,6 +122,11 @@ class SliderImageActivity : BaseActivity() {
             adapter?.updateListImageSlider(images)
         })
         activitySliderImageBinding?.executePendingBindings()
+    }
+
+    private fun newDocumentIntent(): Intent = Intent(this, FlagsActivity::class.java).apply {
+        addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or android.content.Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

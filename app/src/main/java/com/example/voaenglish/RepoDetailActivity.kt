@@ -63,7 +63,6 @@ class RepoDetailActivity : BaseActivity() {
             intent.putExtra("title", title)
             context.startActivity(intent)
         }
-
     }
 
     override fun getBindingVariable(): Int {
@@ -81,6 +80,7 @@ class RepoDetailActivity : BaseActivity() {
         var link = intent?.extras?.getString("link")
         var title = intent?.extras?.getString("title")
 
+       
         setupWebView()
         setClickListeners()
 

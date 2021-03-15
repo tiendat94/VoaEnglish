@@ -10,12 +10,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
+import com.example.voaenglish.MainActivityKotlin
 import com.example.voaenglish.R
 import com.example.voaenglish.adapter.MessageAdapter
 import com.example.voaenglish.base.BaseActivity
+import com.example.voaenglish.callback.MessageDao
+import com.example.voaenglish.database.AppDatabase
 import com.example.voaenglish.databinding.ActivityMessageBinding
+import com.example.voaenglish.model.Message
 import com.example.voaenglish.utils.DirInfo
 import com.example.voaenglish.utils.SongInfo
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.android.synthetic.main.fragment_repo_list.*
 import java.io.File
@@ -24,6 +30,8 @@ class MessageActivity : BaseActivity() {
 
     private lateinit var activityMessageBinding: ActivityMessageBinding
     private lateinit var adapter: MessageAdapter
+    private lateinit var messageDao: MessageDao
+    private var listMessage: ArrayList<Message> = ArrayList()
 
     override fun getBindingVariable(): Int {
         return 0
@@ -39,7 +47,28 @@ class MessageActivity : BaseActivity() {
         activityMessageBinding.viewmodel = ViewModelProviders.of(this@MessageActivity).get(MessageViewModel::class.java)
         activityMessageBinding.viewmodel?.fetListInbox()
         activityMessageBinding.viewmodel?.fetRssFeed()
-        setupObservers()
+
+        val db = Room.inMemoryDatabaseBuilder(applicationContext, AppDatabase::class.java)
+                .allowMainThreadQueries()
+                .build()
+
+
+
+        swipe_refresh_layout.setOnRefreshListener {
+            setupObservers()
+        }
+
+        if (isNetworkConnected) {
+            setupObservers()
+        } else {
+
+        }
+
+//        val listMessage = messageDao.getAll()
+//        listMessage?.forEach {
+//            Log.d("MessageActivity", it.message)
+//        }
+
         setupAdapter()
         listenerSwipe()
 
@@ -50,6 +79,10 @@ class MessageActivity : BaseActivity() {
             } else {
                 adapter?.unSelectAll()
             }
+        }
+
+        buttonSend?.setOnClickListener {
+            MainActivityKotlin.start(applicationContext, Gson().toJson(listMessage))
         }
 
         activityMessageBinding.executePendingBindings()
@@ -107,7 +140,9 @@ class MessageActivity : BaseActivity() {
 
     private fun setupObservers() {
         activityMessageBinding.viewmodel?.repoListInboxLive?.observe(this, Observer {
+            listMessage = it as ArrayList<Message>
             adapter?.updateListMessage(it)
+            //messageDao.insertAll(it)
             Log.d("MessageActivity", it[0]?.message)
         })
 

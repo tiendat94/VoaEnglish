@@ -51,4 +51,6 @@ class SliderImageAdapter(private val context: Context) : SliderViewAdapter<Slide
         val dataBinding = ImageSliderLayoutItemBinding.inflate(inflater, parent, false)
         return SliderAdapterViewHolder(dataBinding)
     }
+    
+
 }

@@ -19,6 +19,8 @@ public class GitHubClient {
 
     public static Retrofit retrofit = null;
 
+    public static String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIzZjIxMjRhMC1kNzRkLTQzNWYtM2VkOS0wOGQ4YTY0OTM5ZmYiLCJ1bmlxdWVfbmFtZSI6ImFkbWluIiwibmJmIjoxNjE0NTAxMzg2LCJleHAiOjE2MTQ1MDczODYsImlhdCI6MTYxNDUwMTM4Nn0.cEfd-oLpp1EmhZA96yTkCUMPzPx87nCpa3uUIJ04lqo";
+
     public static GitHubService getGitHubService() {
         if (retrofit == null) {
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
@@ -34,7 +36,7 @@ public class GitHubClient {
                     Request original = chain.request();
                     // Request customization: add request headers
                     Request.Builder requestBuilder = original.newBuilder();
-//                    requestBuilder.addHeader("Authorization", MyApplication.getInstance().getDataStoreApp().getAccessToken());
+                    requestBuilder.addHeader("Authorization", token);
                     requestBuilder.removeHeader("Content-type");
                     Request request = requestBuilder.build();
                     return chain.proceed(request);

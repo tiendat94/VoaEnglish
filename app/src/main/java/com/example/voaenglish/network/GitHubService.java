@@ -1,5 +1,7 @@
 package com.example.voaenglish.network;
 
+import com.example.voaenglish.model.CloudResponseBody;
+import com.example.voaenglish.model.FilterResponse;
 import com.example.voaenglish.model.GitHubRepo;
 import com.example.voaenglish.model.Message;
 import com.example.voaenglish.model.Project;
@@ -25,5 +27,12 @@ public interface GitHubService {
 
     @GET("https://api.androidhive.info/json/inbox.json")
     Call<List<Message>> getInbox();
+
+    @GET("https://api.androidhive.info/json/inbox.json")
+    Call<CloudResponseBody> getInboxNew();
+
+    @GET("https://a-vpdt-be.vhtcddh.com/api/ScheduleTypes/getAll")
+    Call<FilterResponse> getFilterSchedule();
+
 
 }

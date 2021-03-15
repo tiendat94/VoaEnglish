@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="@{message.from}"
                 android:textColor="@color/gray"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -96,7 +95,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@{message.from.substring(0,1)}"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -107,7 +105,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@{message.timestamp}"
             android:textColor="@color/gray"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -118,7 +115,7 @@
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:tint="@color/gray" />
+             />
 
         <CheckBox
             android:id="@+id/checkbox_message"

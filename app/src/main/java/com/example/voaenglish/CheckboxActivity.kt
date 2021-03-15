@@ -1,11 +1,17 @@
 package com.example.voaenglish
 
+import android.content.ComponentName
+import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.IBinder
 import android.widget.Toast
 import com.example.voaenglish.base.BaseActivity
+import com.example.voaenglish.service.ExampleService
+import com.example.voaenglish.service.ForegroundService
 import kotlinx.android.synthetic.main.activity_check.*
 
-class CheckboxActivity : BaseActivity() {
+class CheckboxActivity : BaseActivity(), ServiceConnection {
     var count: Int = 0
 
     override fun getBindingVariable(): Int {
@@ -18,6 +24,9 @@ class CheckboxActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ForegroundService.startService(this, "Foreground Service is running...")
+
         checkbox_one?.setOnCheckedChangeListener { buttonView, isChecked ->
             isCheckedOrNot(isChecked)
         }
@@ -50,5 +59,19 @@ class CheckboxActivity : BaseActivity() {
                 count--
             }
         }
+    }
+
+    override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+        val b: ExampleService.MyBinder = service as ExampleService.MyBinder
+
+    }
+
+    override fun onServiceDisconnected(name: ComponentName?) {
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ForegroundService.stopService(this)
     }
 }

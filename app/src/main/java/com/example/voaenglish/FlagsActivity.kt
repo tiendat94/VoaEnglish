@@ -8,8 +8,7 @@ import com.example.voaenglish.adapter.FlagsAdapter
 import com.example.voaenglish.base.BaseActivity
 import com.example.voaenglish.viewmodel.FlagViewModel
 import kotlinx.android.synthetic.main.activity_flag.*
-import java.util.*
-import kotlin.collections.ArrayList
+
 
 class FlagsActivity : BaseActivity() {
 

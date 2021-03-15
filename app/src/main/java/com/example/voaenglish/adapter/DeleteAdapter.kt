@@ -57,6 +57,7 @@ class DeleteAdapter constructor(private val context: Context, private val countC
     }
 
     override fun onBindViewHolder(holder: DeleteViewHolder, position: Int) {
+        val currentData: Data = dataList[position]
         holder?.setup(dataList[position])
         holder?.itemView?.chk_selected.isChecked = dataList[position].isSelected!!
         holder?.itemView?.tag = dataList[position]
@@ -65,21 +66,29 @@ class DeleteAdapter constructor(private val context: Context, private val countC
             if (isChecked) {
                 if (countCheckBox != null) {
                     count = count?.plus(dataList[position].count!!)
+                    Toast.makeText(context, count.toString(), Toast.LENGTH_LONG).show()
                     count?.let { countCheckBox.getCountCheckBox(it) }
+                    dataList?.let { countCheckBox.getDataListCheckBox(dataList) }
+                    currentData?.let { countCheckBox.onItemCheck(it) }
                 }
+
+                Toast.makeText(context, "checked", Toast.LENGTH_LONG).show()
             } else {
                 if (countCheckBox != null) {
                     count = count?.minus(dataList[position].count!!)
                     count?.let { countCheckBox.getCountCheckBox(it) }
+                    currentData?.let { countCheckBox.onItemUncheck(it) }
                 }
+                Toast.makeText(context, "unchecked", Toast.LENGTH_LONG).show()
+
             }
 
         }
+
         holder?.itemView?.btn_delete_unit.setOnClickListener {
             deleteItemFromList(it, position)
         }
     }
-
 
     override fun getItemCount(): Int {
         return dataList.size
@@ -87,6 +96,9 @@ class DeleteAdapter constructor(private val context: Context, private val countC
 
     interface CountCheckBox {
         fun getCountCheckBox(count: Int)
+        fun getDataListCheckBox(dataList: ArrayList<Data>)
+        fun onItemCheck(data: Data)
+        fun onItemUncheck(data: Data)
     }
 
 

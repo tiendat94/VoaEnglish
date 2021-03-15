@@ -16,6 +16,7 @@ import com.example.voaenglish.callback.ProjectClickCallback;
 import com.example.voaenglish.databinding.ProjectListItemBinding;
 import com.example.voaenglish.model.Project;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,11 +24,13 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 
     public List<? extends Project> projectList;
 
+
     @Nullable
     private final ProjectClickCallback projectClickCallback;
 
     public ProjectAdapter(@Nullable ProjectClickCallback projectClickCallback) {
         this.projectClickCallback = projectClickCallback;
+
     }
 
     public void setProjectList(final List<? extends Project> projectList) {

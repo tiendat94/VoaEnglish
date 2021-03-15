@@ -8,5 +8,7 @@ class Constants {
         const val DB_NAME = "voaenglish"
         const val FILE_SCHEME = "file://"
         const val UTF8 = "UTF-8"
+        const val VIEW_TYPE_ITEM = 0
+        const val VIEW_TYPE_LOADING = 1
     }
 }

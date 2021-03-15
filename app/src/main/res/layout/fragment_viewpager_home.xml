@@ -14,8 +14,6 @@
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints">
 
-
-
         <TextView
             android:id="@+id/textvewPets"
             android:layout_width="wrap_content"

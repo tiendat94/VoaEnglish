@@ -20,7 +20,7 @@ class MessageAdapter(private val messageViewModel: MessageViewModel) : RecyclerV
 
         fun setup(message: Message?) {
             dataBinding.setVariable(BR.message, message)
-            Glide.with(itemView.context).load(message?.picture).into(itemView.icon_profile)
+            // Glide.with(itemView.context).load(message?.picture).into(itemView.icon_profile)
             dataBinding.executePendingBindings()
 
             itemView.setOnClickListener {
